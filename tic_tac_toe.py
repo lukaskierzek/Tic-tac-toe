@@ -12,8 +12,8 @@ class TicTacToe:
         self.c_player_1: list = []  # player_1's coordinates
         self.c_player_2: list = []  # players_2's coordinates
         self.added_coordinates: list = []
-        self.win_v: list = []   # win_vertical
-        self.win_h: list = []   # win_horizontally
+        self.win_v: list = []  # win_vertical
+        self.win_h: list = []  # win_horizontally
 
     def instruction(self) -> None:
         print("Coordinates:")
