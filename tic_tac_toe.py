@@ -1,19 +1,20 @@
+from dataclasses import dataclass, field
 from typing import Any
 
 
+@dataclass(repr=False, eq=False, match_args=False)
 class TicTacToe:
-    def __init__(self):
-        self.size: int = 3
-        self.winner: int = 0
-        self.who_now: str = 'player_1'
-        self.board: list = [[' ', ' ', ' '],
-                            [' ', ' ', ' '],
-                            [' ', ' ', ' ']]
-        self.c_player_1: list = []  # player_1's coordinates
-        self.c_player_2: list = []  # players_2's coordinates
-        self.added_coordinates: list = []
-        self.win_v: list = []  # win_vertical
-        self.win_h: list = []  # win_horizontally
+    size: int = 3
+    winner: int = 0
+    who_now: str = 'player_1'
+    board: list[str] = field(default_factory=lambda: [[' ', ' ', ' '],
+                                                      [' ', ' ', ' '],
+                                                      [' ', ' ', ' ']], )
+    c_player_1: list = field(default_factory=list)  # player_1's coordinates
+    c_player_2: list = field(default_factory=list)  # players_2's coordinates
+    added_coordinates: list = field(default_factory=list)
+    win_v: list = field(default_factory=list)  # win_vertical
+    win_h: list = field(default_factory=list)  # win_horizontally
 
     def instruction(self) -> None:
         print("Coordinates:")
@@ -81,7 +82,7 @@ class TicTacToe:
                 continue
             break
 
-    def check_horizontally(self):
+    def check_horizontally(self) -> None:
         for i in range(self.size):
             for j in range(self.size):
                 if self.board[j][i] == 'X':
@@ -106,7 +107,7 @@ class TicTacToe:
                 continue
             break
 
-    def check_diagonal(self):
+    def check_diagonal(self) -> None:
         if self.board[0][0] == 'X' and self.board[1][1] == 'X' and self.board[2][2] == 'X':
             print("Win 1!")
             self.winner = 1
@@ -120,7 +121,7 @@ class TicTacToe:
             print("Win 2!")
             self.winner = 2
 
-    def game(self):
+    def game(self) -> None:
         self.instruction()
         while True:
             try:
@@ -173,11 +174,11 @@ class TicTacToe:
                     print("=" * 40)
 
             except ValueError:
-                print(">>>>Please enter a integer coordinates number e.g. 1,1 !<<<<")
+                print(">>>>Please enter the number of integer coordinates e.g. 1,1 !<<<<")
             except IndexError:
-                print(f">>>>Range a board is {self.size}!<<<<")
-                print(">>>>Min is a 1, max is a 3!<<<<")
-                print(">>>>Allow coordinates: 1,1 ; 1,2 ; 1,3 ; 2,1 ; 2,2 ; 2,3 ; 3,1 ; 3,2 ; 3,3<<<<")
+                print(f">>>>The board's range is {self.size}!<<<<")
+                print(">>>>Min is 1, max is 3!<<<<")
+                print(">>>>Allowed coordinates:\n 1,1 ; 1,2 ; 1,3 ;\n 2,1 ; 2,2 ; 2,3 ;\n 3,1 ; 3,2 ; 3,3 ;<<<<")
             except Exception as exception:
                 print(f">>>>{exception}<<<<")
 
