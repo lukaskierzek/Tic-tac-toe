@@ -3,17 +3,20 @@ from typing import Any
 
 class TicTacToe:
     def __init__(self) -> None:
-        self.size = 3
-        self.winner = 0
-        self.who_now = 'player_1'
-        self.board = [[' ', ' ', ' '],
-                      [' ', ' ', ' '],
-                      [' ', ' ', ' ']]
-        self.c_player_1 = []
-        self.c_player_2 = []
-        self.add_coordinates = []
-        self.win_v = []
-        self.win_h = []
+        self.size: int = 3
+        self.winner: int = 0
+
+        self.who_now: str = 'player_1'
+
+        self.board: list[list[str]] = [[' ', ' ', ' '],
+                                       [' ', ' ', ' '],
+                                       [' ', ' ', ' ']]
+        self.c_player_1: list[str] = []
+        self.c_player_2: list[str] = []
+        self.add_coordinates: list[str] = []
+
+        self.win_v: list[int] = []
+        self.win_h: list[int] = []
 
     def instruction(self) -> None:
         print("Coordinates:")
@@ -35,9 +38,9 @@ class TicTacToe:
     def coordinates_player_1(self) -> Any:
         self.c_player_1.clear()
 
-        coordinates_player_1 = input("[Player 1] Enter the coordinates: ")
-        coordinates_player_1_strip = coordinates_player_1.strip()
-        coordinates_player_1_split = coordinates_player_1_strip.split(",")
+        coordinates_player_1: str = input("[Player 1] Enter the coordinates: ")
+        coordinates_player_1_strip: str = coordinates_player_1.strip()
+        coordinates_player_1_split: list[str] = coordinates_player_1_strip.split(",")
 
         for i in coordinates_player_1_split:
             self.c_player_1.append(i.strip())
@@ -50,9 +53,9 @@ class TicTacToe:
     def coordinates_player_2(self) -> Any:
         self.c_player_2.clear()
 
-        coordinates_player_2 = input("[Player 2] Enter the coordinates: : ")
-        coordinates_player_2_strip = coordinates_player_2.strip()
-        coordinates_player_2_split = coordinates_player_2_strip.split(",")
+        coordinates_player_2: str = input("[Player 2] Enter the coordinates: : ")
+        coordinates_player_2_strip: str = coordinates_player_2.strip()
+        coordinates_player_2_split: list[str] = coordinates_player_2_strip.split(",")
 
         for i in coordinates_player_2_split:
             self.c_player_2.append(i.strip())
