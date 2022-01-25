@@ -3,22 +3,23 @@ from typing import Any
 
 class TicTacToe:
     def __init__(self) -> None:
-        self.size: int = 3
-        self.winner: int = 0
+        self.size: int = 3  # board's size.
+        self.winner: int = 0  # winner's number. When Player 1 is the winner, then 'self.winner = 1'.
 
-        self.who_now: str = 'player_1'
+        self.who_now: str = 'player_1'  # Whose turn is it now.
 
         self.board: list[list[str]] = [[' ', ' ', ' '],
                                        [' ', ' ', ' '],
-                                       [' ', ' ', ' ']]
-        self.c_player_1: list[str] = []
-        self.c_player_2: list[str] = []
-        self.add_coordinates: list[str] = []
+                                       [' ', ' ', ' ']]  # game broad
+        self.c_player_1: list[str] = []  # player 1's coordinates
+        self.c_player_2: list[str] = []  # player 2's coordinates
+        self.add_coordinates: list[str] = []  # Coordinates given during the game
 
-        self.win_v: list[int] = []
-        self.win_h: list[int] = []
+        self.win_v: list[int] = []  # List of numbers when checking vertically. See function 'check_vertically'
+        self.win_h: list[int] = []  # List of numbers when checking horizontally. See function 'check_horizontally'
 
     def instruction(self) -> None:
+        """Drawing the broad game with possible coordinates to enter:"""
         print("Coordinates:")
         for i in range(self.size):
             print("  --- " * self.size)
@@ -28,6 +29,7 @@ class TicTacToe:
         print("  --- " * self.size)
 
     def draw(self) -> None:
+        """Drawing the broad game with entered 'X' or 'O'"""
         for i in range(self.size):
             print(" ---" * self.size)
             for j in range(self.size):
