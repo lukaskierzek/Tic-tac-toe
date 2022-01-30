@@ -3,16 +3,16 @@ from typing import Any
 
 class TicTacToe:
     def __init__(self) -> None:
-        self.size: int = 3  # board's size.
-        self.winner: int = 0  # winner's number. When Player 1 is the winner, then 'self.winner = 1'.
+        self.size: int = 3  # Board's size
+        self.winner: int = 0  # Winner's number. When Player 1 is the winner, then 'self.winner = 1'
 
-        self.who_now: str = 'player_1'  # Whose turn is it now.
+        self.who_now: str = 'player_1'  # Whose turn is it now
 
         self.board: list[list[str]] = [[' ', ' ', ' '],
                                        [' ', ' ', ' '],
-                                       [' ', ' ', ' ']]  # game broad
-        self.c_player_1: list[str] = []  # player 1's coordinates
-        self.c_player_2: list[str] = []  # player 2's coordinates
+                                       [' ', ' ', ' ']]  # Game broad
+        self.c_player_1: list[str] = []  # Player 1's coordinates
+        self.c_player_2: list[str] = []  # Player 2's coordinates
         self.add_coordinates: list[str] = []  # Coordinates given during the game
 
         self.win_v: list[int] = []  # List of numbers when checking vertically. See function 'check_vertically'
