@@ -38,6 +38,7 @@ class TicTacToe:
         print(" ---" * self.size)
 
     def coordinates_player_1(self) -> Any:
+        """Player 1 enters the coordinates that are process"""
         self.c_player_1.clear()
 
         coordinates_player_1: str = input("[Player 1] Enter the coordinates: ")
@@ -53,6 +54,7 @@ class TicTacToe:
             raise Exception("Please enter other coordinates!")
 
     def coordinates_player_2(self) -> Any:
+        """Player 2 enters the coordinates that are process"""
         self.c_player_2.clear()
 
         coordinates_player_2: str = input("[Player 2] Enter the coordinates: : ")
@@ -68,6 +70,7 @@ class TicTacToe:
             raise Exception("Please enter other coordinates!")
 
     def check_vertically(self) -> None:
+        """Check vertically if Player 1 or Player 2 is winning"""
         for i in range(self.size):
             for j in range(self.size):
                 if self.board[i][j] == 'X':
@@ -93,6 +96,7 @@ class TicTacToe:
             break
 
     def check_horizontally(self) -> None:
+        """Check horizontally if Player 1 or Player 2 is winning"""
         for j in range(self.size):
             for k in range(self.size):
                 if self.board[k][j] == 'X':
@@ -118,6 +122,7 @@ class TicTacToe:
             break
 
     def check_diagonal(self) -> None:
+        """Check diagonal if Player 1 or Player 2 is winning"""
         if self.board[0][0] == 'X' and self.board[1][1] == 'X' and self.board[2][2] == 'X':
             print("Player 1 is the winner!")
             self.winner = 1
@@ -132,6 +137,7 @@ class TicTacToe:
             self.winner = 2
 
     def game(self) -> None:
+        """Main function with the code game"""
         self.instruction()
         while True:
             try:
