@@ -144,7 +144,10 @@ class TicTacToe:
                 if self.who_now == 'player_1':
                     self.coordinates_player_1()
 
+                    # Assign the letter 'X' to the board according to player_1's coordinates
                     self.board[int(self.c_player_1[0]) - 1][int(self.c_player_1[1]) - 1] = 'X'
+
+                    # Add player_1's coordinates to 'add_coordinates' variable
                     self.add_coordinates.append([self.c_player_1[0], self.c_player_1[1]])
 
                     self.c_player_1.clear()
@@ -171,7 +174,10 @@ class TicTacToe:
                 elif self.who_now == 'player_2':
                     self.coordinates_player_2()
 
+                    # Assign the letter 'X' to the board according to player_2's coordinates
                     self.board[int(self.c_player_2[0]) - 1][int(self.c_player_2[1]) - 1] = 'O'
+
+                    # Add player_2's coordinates to 'add_coordinates' variable
                     self.add_coordinates.append([self.c_player_2[0], self.c_player_2[1]])
 
                     self.c_player_2.clear()
