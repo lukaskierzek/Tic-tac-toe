@@ -165,7 +165,7 @@ class TicTacToe:
                     if self.winner == 1:
                         break
 
-                    if len(tic_tac_toe.add_coordinates) == 9:
+                    if len(self.add_coordinates) == 9:
                         print("Tie!")
                         break
 
