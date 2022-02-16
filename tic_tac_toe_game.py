@@ -210,9 +210,9 @@ class TicTacToe:
 
 
 def main():
-    pass
+    tic_tac_toe = TicTacToe()
+    tic_tac_toe.game()
 
 
 if __name__ == '__main__':
-    tic_tac_toe = TicTacToe()
-    tic_tac_toe.game()
+    main()
