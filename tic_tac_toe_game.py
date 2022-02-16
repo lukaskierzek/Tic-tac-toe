@@ -209,7 +209,7 @@ class TicTacToe:
                 print(f">>>>{exception}<<<<")
 
 
-def main():
+def main() -> None:
     tic_tac_toe = TicTacToe()
     tic_tac_toe.game()
 
