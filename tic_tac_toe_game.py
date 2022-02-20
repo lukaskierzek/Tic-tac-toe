@@ -3,20 +3,34 @@ from typing import Any
 
 class TicTacToe:
     def __init__(self) -> None:
-        self.size: int = 3  # Board's size
-        self.winner: int = 0  # Winner's number. When Player 1 is the winner, then 'self.winner = 1'
+        # Board's size
+        self.size: int = 3
 
-        self.who_now: str = 'player_1'  # Whose turn is it now
+        # Winner's number. When Player 1 is the winner, then 'self.winner = 1'
+        self.winner: int = 0
 
+        # Whose turn is it now
+        self.who_now: str = 'player_1'
+
+        # Game broad
         self.board: list[list[str]] = [[' ', ' ', ' '],
                                        [' ', ' ', ' '],
-                                       [' ', ' ', ' ']]  # Game broad
-        self.c_player_1: list[str] = []  # Player 1's coordinates
-        self.c_player_2: list[str] = []  # Player 2's coordinates
-        self.add_coordinates: list[str] = []  # Coordinates given during the game
+                                       [' ', ' ', ' ']]
 
-        self.win_v: list[int] = []  # List of numbers when checking vertically. See function 'check_vertically'
-        self.win_h: list[int] = []  # List of numbers when checking horizontally. See function 'check_horizontally'
+        # Player 1's coordinates
+        self.c_player_1: list[str] = []
+
+        # Player 2's coordinates
+        self.c_player_2: list[str] = []
+
+        # Coordinates given during the game
+        self.add_coordinates: list[str] = []
+
+        # List of numbers when checking vertically. See function 'check_vertically'
+        self.win_v: list[int] = []
+
+        # List of numbers when checking horizontally. See function 'check_horizontally'
+        self.win_h: list[int] = []
 
     def instruction(self) -> None:
         """Drawing the broad game with possible coordinates to enter:"""
