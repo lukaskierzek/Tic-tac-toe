@@ -1,3 +1,5 @@
 Dockerfile
+README.md
 .idea
 .gitignore
+.gitattributes
