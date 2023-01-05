@@ -49,7 +49,7 @@ class TicTacToe:
             print("|")
         print(" ---" * self.BOARD_SIZE)
 
-    def coordinates_processing_input(self) -> list[str]:
+    def _coordinates_processing_input(self) -> list[str]:
         coordinates = input(f"Enter coordinates for {self.who_now}: ")
         coordinates_strip = coordinates.strip()
         coordinates_strip_split = coordinates_strip.split(",")
@@ -61,7 +61,7 @@ class TicTacToe:
         elif self.who_now == self.player_2_name:
             self.player_2_coordinates.clear()
 
-        coordinates = self.coordinates_processing_input()
+        coordinates = self._coordinates_processing_input()
 
         for coordinate in coordinates:
             index_error_term = (int(coordinate) < 1 or int(coordinate) > 3) \
