@@ -64,10 +64,7 @@ class TicTacToe:
         coordinates = self._coordinates_processing_input()
 
         for coordinate in coordinates:
-            index_error_term = (int(coordinate) < 1 or int(coordinate) > 3) \
-                               or (coordinate is str) \
-                               or (len(coordinates) > 2)
-
+            index_error_term: bool = (int(coordinate) < 1 or int(coordinate) > 3) or (coordinate is str) or (len(coordinates) > 2)
             if self.who_now == self.player_1_name:
                 self.player_1_coordinates.append(coordinate.strip())
                 if index_error_term:
@@ -93,17 +90,11 @@ class TicTacToe:
                 elif self.board[v_i][v_j] == ' ':
                     self.win_vertical.append(0)
 
-                if len(self.win_vertical) == 3 \
-                        and self.win_vertical[0] == 1 \
-                        and self.win_vertical[1] == 1 \
-                        and self.win_vertical[2] == 1:
+                if len(self.win_vertical) == 3 and self.win_vertical[0] == 1 and self.win_vertical[1] == 1 and self.win_vertical[2] == 1:
                     print(self.message_player_1_win)
                     self.winner = 1
                     break
-                elif len(self.win_vertical) == 3 \
-                        and self.win_vertical[0] == 2 \
-                        and self.win_vertical[1] == 2 \
-                        and self.win_vertical[2] == 2:
+                elif len(self.win_vertical) == 3 and self.win_vertical[0] == 2 and self.win_vertical[1] == 2 and self.win_vertical[2] == 2:
                     print(self.message_player_2_win)
                     self.winner = 2
                     break
@@ -124,17 +115,11 @@ class TicTacToe:
                 elif self.board[h_j][h_i] == ' ':
                     self.win_horizontally.append(0)
 
-                if len(self.win_horizontally) == 3 \
-                        and self.win_horizontally[0] == 1 \
-                        and self.win_horizontally[1] == 1 \
-                        and self.win_horizontally[2] == 1:
+                if len(self.win_horizontally) == 3 and self.win_horizontally[0] == 1 and self.win_horizontally[1] == 1 and self.win_horizontally[2] == 1:
                     print(self.message_player_1_win)
                     self.winner = 1
                     break
-                elif len(self.win_horizontally) == 3 \
-                        and self.win_horizontally[0] == 2 \
-                        and self.win_horizontally[1] == 2 \
-                        and self.win_horizontally[2] == 2:
+                elif len(self.win_horizontally) == 3 and self.win_horizontally[0] == 2 and self.win_horizontally[1] == 2 and self.win_horizontally[2] == 2:
                     print(self.message_player_2_win)
                     self.winner = 2
                     break
@@ -145,16 +130,15 @@ class TicTacToe:
                 continue
             break
 
-    def _player_1_win_diagonal(self):
+    def _player_1_win_diagonal(self) -> None:
         print(self.message_player_1_win)
         self.winner = 1
 
-    def _player_2_win_diagonal(self):
+    def _player_2_win_diagonal(self) -> None:
         print(self.message_player_2_win)
         self.winner = 2
 
     def check_diagonal(self) -> None:
-
         if self.board[0][0] == 'X' and self.board[1][1] == 'X' and self.board[2][2] == 'X':
             self._player_1_win_diagonal()
         elif self.board[0][2] == 'X' and self.board[1][1] == 'X' and self.board[2][0] == 'X':
@@ -234,5 +218,5 @@ class TicTacToe:
 
 
 if __name__ == '__main__':
-    tic_tac_toe = TicTacToe()
+    tic_tac_toe: TicTacToe = TicTacToe()
     tic_tac_toe.game()
