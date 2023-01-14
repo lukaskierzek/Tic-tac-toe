@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 
-@dataclass(repr=False, eq=False, match_args=False)
+@dataclass(repr=False, eq=False, match_args=False, slots=True)
 class TicTacToe:
     BOARD_SIZE: int = field(init=False)
     winner: int = field(init=False)
