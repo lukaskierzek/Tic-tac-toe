@@ -148,20 +148,27 @@ class TicTacToe:
         elif self.board[0][2] == 'O' and self.board[1][1] == 'O' and self.board[2][0] == 'O':
             self._player_2_win_diagonal()
 
+    def _coordinate_processing_during_game(self) -> None:
+        self.coordinates_processing()
+
+        if self.who_now == self.player_1_name:
+            self.board[int(self.player_1_coordinates[0]) - 1][int(self.player_1_coordinates[1]) - 1] = 'X'
+            self.added_coordinates.append([self.player_1_coordinates[0], self.player_1_coordinates[1]])
+            self.player_1_coordinates.clear()
+        elif self.who_now == self.player_2_name:
+            self.board[int(self.player_2_coordinates[0]) - 1][int(self.player_2_coordinates[1]) - 1] = 'O'
+            self.added_coordinates.append([self.player_2_coordinates[0], self.player_2_coordinates[1]])
+            self.player_2_coordinates.clear()
+
+        self.draw()
+
     def game(self) -> None:
         self.instruction()
 
         while True:
             try:
                 if self.who_now == self.player_1_name:
-                    self.coordinates_processing()
-
-                    self.board[int(self.player_1_coordinates[0]) - 1][int(self.player_1_coordinates[1]) - 1] = 'X'
-                    self.added_coordinates.append([self.player_1_coordinates[0], self.player_1_coordinates[1]])
-
-                    self.player_1_coordinates.clear()
-
-                    self.draw()
+                    self._coordinate_processing_during_game()
 
                     self.check_vertically()
                     if self.winner == 1:
@@ -182,14 +189,7 @@ class TicTacToe:
                     self.who_now = self.player_2_name
 
                 elif self.who_now == self.player_2_name:
-                    self.coordinates_processing()
-
-                    self.board[int(self.player_2_coordinates[0]) - 1][int(self.player_2_coordinates[1]) - 1] = 'O'
-                    self.added_coordinates.append([self.player_2_coordinates[0], self.player_2_coordinates[1]])
-
-                    self.player_2_coordinates.clear()
-
-                    self.draw()
+                    self._coordinate_processing_during_game()
 
                     self.check_vertically()
                     if self.winner == 2:
