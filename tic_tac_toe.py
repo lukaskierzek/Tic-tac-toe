@@ -12,6 +12,7 @@ class TicTacToe:
     who_now: str = field(init=False)
     message_player_1_win: str = field(init=False)
     message_player_2_win: str = field(init=False)
+    coordinates: str = field(init=False)
 
     board: list[list[str]] = field(default_factory=list)
     player_1_coordinates: list = field(default_factory=list)
@@ -31,15 +32,18 @@ class TicTacToe:
         self.board = [[' ', ' ', ' '],
                       [' ', ' ', ' '],
                       [' ', ' ', ' ']]
+        self.coordinates = """
+  ---   ---   ---  
+| 1,1 | 1,2 | 1,3 |
+  ---   ---   ---
+| 2,1 | 2,2 | 2,3 |
+  ---   ---   ---
+| 3,1 | 3,2 | 3,3 |
+  ---   ---   ---
+        """
 
     def instruction(self) -> None:
-        print("Coordinates:")
-        for i in range(self.BOARD_SIZE):
-            print("  --- " * self.BOARD_SIZE)
-            for j in range(self.BOARD_SIZE):
-                print(f"| {i + 1},{j + 1} ", end="")
-            print("|")
-        print("  --- " * self.BOARD_SIZE)
+        print("Coordinates:", self.coordinates)
 
     def draw(self) -> None:
         for i in range(self.BOARD_SIZE):
