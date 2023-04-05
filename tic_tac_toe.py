@@ -163,17 +163,18 @@ class TicTacToe:
         elif self.board[0][2] == 'O' and self.board[1][1] == 'O' and self.board[2][0] == 'O':
             self._player_2_win_diagonal()
 
+    def _coordinate_processing_for_player_1_or_player_2(self, player, x_or_o):
+        self.board[int(player[0]) - 1][int(player[1]) - 1] = x_or_o
+        self.added_coordinates.append([player[0], player[1]])
+        player.clear()
+
     def _coordinate_processing_during_game(self) -> None:
         self.coordinates_processing()
 
         if self.who_now == self.player_1_name:
-            self.board[int(self.player_1_coordinates[0]) - 1][int(self.player_1_coordinates[1]) - 1] = 'X'
-            self.added_coordinates.append([self.player_1_coordinates[0], self.player_1_coordinates[1]])
-            self.player_1_coordinates.clear()
+            self._coordinate_processing_for_player_1_or_player_2(self.player_1_coordinates, 'X')
         elif self.who_now == self.player_2_name:
-            self.board[int(self.player_2_coordinates[0]) - 1][int(self.player_2_coordinates[1]) - 1] = 'O'
-            self.added_coordinates.append([self.player_2_coordinates[0], self.player_2_coordinates[1]])
-            self.player_2_coordinates.clear()
+            self._coordinate_processing_for_player_1_or_player_2(self.player_2_coordinates, 'O')
 
         board = DrawBoard(self.BOARD_SIZE, self.board)
         board.print()
