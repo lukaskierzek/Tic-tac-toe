@@ -1,8 +1,46 @@
 from dataclasses import dataclass, field
 from typing import Any
+from abc import ABC, abstractmethod
 
 
-@dataclass(repr=False, eq=False, match_args=False, slots=True)
+class Board(ABC):
+    @abstractmethod
+    def print(self):
+        pass
+
+
+@dataclass
+class DrawBoard(Board):
+    board_size: int = field()
+    board: list[list[str]] = field(default_factory=list)
+
+    def print(self):
+        for i in range(self.board_size):
+            print(" ---" * self.board_size)
+            for j in range(self.board_size):
+                print(f"| {self.board[i][j]} ", end="")
+            print("|")
+        print(" ---" * self.board_size)
+
+
+@dataclass
+class DrawInstruction(Board):
+    coordinates: str = field(init=False)
+
+    def print(self):
+        self.coordinates = """
+  ---   ---   ---  
+| 1,1 | 1,2 | 1,3 |
+  ---   ---   ---
+| 2,1 | 2,2 | 2,3 |
+  ---   ---   ---
+| 3,1 | 3,2 | 3,3 |
+  ---   ---   ---
+"""
+        print(f"Coordinates: {self.coordinates}")
+
+
+@dataclass(slots=True)
 class TicTacToe:
     BOARD_SIZE: int = field(init=False)
     winner: int = field(init=False)
@@ -12,7 +50,6 @@ class TicTacToe:
     who_now: str = field(init=False)
     message_player_1_win: str = field(init=False)
     message_player_2_win: str = field(init=False)
-    coordinates: str = field(init=False)
 
     board: list[list[str]] = field(default_factory=list)
     player_1_coordinates: list = field(default_factory=list)
@@ -32,26 +69,6 @@ class TicTacToe:
         self.board = [[' ', ' ', ' '],
                       [' ', ' ', ' '],
                       [' ', ' ', ' ']]
-        self.coordinates = """
-  ---   ---   ---  
-| 1,1 | 1,2 | 1,3 |
-  ---   ---   ---
-| 2,1 | 2,2 | 2,3 |
-  ---   ---   ---
-| 3,1 | 3,2 | 3,3 |
-  ---   ---   ---
-        """
-
-    def instruction(self) -> None:
-        print("Coordinates:", self.coordinates)
-
-    def draw(self) -> None:
-        for i in range(self.BOARD_SIZE):
-            print(" ---" * self.BOARD_SIZE)
-            for j in range(self.BOARD_SIZE):
-                print(f"| {self.board[i][j]} ", end="")
-            print("|")
-        print(" ---" * self.BOARD_SIZE)
 
     def coordinates_processing(self) -> Any:
         if self.who_now == self.player_1_name:
@@ -64,11 +81,11 @@ class TicTacToe:
         for coordinate in coordinates:
             index_error_term: bool = (int(coordinate) < 1 or int(coordinate) > 3) or (coordinate is str) or (len(coordinates) > 2)
             if self.who_now == self.player_1_name:
-                self.player_1_coordinates.append(coordinate.strip())
+                self.player_1_coordinates.append(coordinate)
                 if index_error_term:
                     raise IndexError()
             elif self.who_now == self.player_2_name:
-                self.player_2_coordinates.append(coordinate.strip())
+                self.player_2_coordinates.append(coordinate)
                 if index_error_term:
                     raise IndexError()
 
@@ -158,10 +175,12 @@ class TicTacToe:
             self.added_coordinates.append([self.player_2_coordinates[0], self.player_2_coordinates[1]])
             self.player_2_coordinates.clear()
 
-        self.draw()
+        board = DrawBoard(self.BOARD_SIZE, self.board)
+        board.print()
 
     def game(self) -> None:
-        self.instruction()
+        instruction = DrawInstruction()
+        instruction.print()
 
         while True:
             try:
