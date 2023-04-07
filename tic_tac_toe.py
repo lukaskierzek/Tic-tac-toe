@@ -9,6 +9,35 @@ class Board(ABC):
         pass
 
 
+class ErrorHandler(ABC):
+    @abstractmethod
+    def print_error(self):
+        pass
+
+
+class ValueErrorPrint(ErrorHandler):
+    def print_error(self):
+        print(">>>>Please enter the number of integer coordinates e.g. 1,1!<<<<")
+
+
+@dataclass
+class IndexErrorPrint(ErrorHandler):
+    board_size: int = field()
+
+    def print_error(self):
+        print(f">>>>The board's range is {self.board_size}!<<<<")
+        print(">>>>Min is 1, max is 3!<<<<")
+        print(">>>>Allowed coordinates:\n 1,1 ; 1,2 ; 1,3 ;\n 2,1 ; 2,2 ; 2,3 ;\n 3,1 ; 3,2 ; 3,3 ;<<<<")
+
+
+@dataclass
+class OtherExceptionPrint(ErrorHandler):
+    exception: Exception = field()
+
+    def print_error(self):
+        print(f">>>>{self.exception}<<<<")
+
+
 @dataclass
 class DrawBoard(Board):
     board_size: int = field()
@@ -42,7 +71,7 @@ class DrawInstruction(Board):
 
 @dataclass(slots=True)
 class TicTacToe:
-    BOARD_SIZE: int = field(init=False)
+    BOARD_SIZE: int = field(init=False, default=3)
     winner: int = field(init=False)
 
     player_1_name: str = field(init=False)
@@ -59,7 +88,6 @@ class TicTacToe:
     win_horizontally: list = field(default_factory=list)
 
     def __post_init__(self) -> None:
-        self.BOARD_SIZE = 3
         self.winner = 0
         self.player_1_name = 'player_1'
         self.player_2_name = 'player_2'
@@ -180,8 +208,7 @@ class TicTacToe:
         board.print()
 
     def game(self) -> None:
-        instruction = DrawInstruction()
-        instruction.print()
+        DrawInstruction().print()
 
         while True:
             try:
@@ -226,13 +253,11 @@ class TicTacToe:
                     print("=" * 40)
 
             except ValueError:
-                print(">>>>Please enter the number of integer coordinates e.g. 1,1 !<<<<")
+                ValueErrorPrint().print_error()
             except IndexError:
-                print(f">>>>The board's range is {self.BOARD_SIZE}!<<<<")
-                print(">>>>Min is 1, max is 3!<<<<")
-                print(">>>>Allowed coordinates:\n 1,1 ; 1,2 ; 1,3 ;\n 2,1 ; 2,2 ; 2,3 ;\n 3,1 ; 3,2 ; 3,3 ;<<<<")
+                IndexErrorPrint(self.BOARD_SIZE).print_error()
             except Exception as exception:
-                print(f">>>>{exception}<<<<")
+                OtherExceptionPrint(exception).print_error()
 
 
 if __name__ == '__main__':
